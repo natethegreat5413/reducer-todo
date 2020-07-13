@@ -1,48 +1,33 @@
 import React, {useState} from 'react'
 
 
-
-const TodoForm = props => {
-    const [newTodo, setNewTodo] = useState("")
+export const TodoForm = props => {
+    const [form, setForm] = useState('')
 
     const handleChanges = e => {
-        setNewTodo(e.target.value);
-    }
-
-    const addTodo = e => {
+        setForm(e.target.value)
+    }  
+    
+    const submitTodo = e => {
         e.preventDefault();
-        setNewTodo("");
-        props.dispatch(
-            {
-                type: "ADD_TODO",
-                payload: {item: newTodo, completed: false, id: Date.now()}
-            }
-        )
-        setNewTodo("")
+        props.addTodo(form)
+        setForm('')
     }
-
-    const clearCompleted = e => {
-        e.preventDefault();
-        props.dispatch({ type: "CLEAR" })
-    }
+    
 
     return(
-        <div>
-            <form>
+        <div className='form'>
+            <form onSubmit={submitTodo}>
                 <input 
-                    className="todo-input"
-                    type="text"
-                    name="newtodotext"
-                    value={newTodo}
+                    type='text'
+                    value={form}
+                    name='todo'
                     onChange={handleChanges}
                 />
-                
+                <button>Add Task</button>
             </form>
-
-            <button onClick={addTodo}>Add Task</button>
-            <button onClick={clearCompleted}>Clear Tasks</button>
         </div>
     )
-}
 
-export default TodoForm
+
+}
