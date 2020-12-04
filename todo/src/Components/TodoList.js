@@ -1,5 +1,7 @@
 import React from 'react'
 import { Todo } from './Todo'
+import Button from '@material-ui/core/Button'
+import Delete from '@material-ui/icons/Delete'
 
 export const TodoList = props => {
     return(
@@ -10,7 +12,7 @@ export const TodoList = props => {
                 key={item.id} 
                 toggleTodo={props.toggleTodo} />
             })}
-            <button onClick={props.clearCompleted}>Clear Task</button>
+            <Button onClick={props.clearCompleted} variant='contained' color='secondary' startIcon={<Delete />}>Clear Task</Button>
         </div>
     )
 }

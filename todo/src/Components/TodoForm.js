@@ -1,30 +1,33 @@
 import React, {useState} from 'react'
-
+import Button from '@material-ui/core/Button'
+import Add from '@material-ui/icons/Add'
+import TextField from '@material-ui/core/TextField'
 
 export const TodoForm = props => {
-    const [form, setForm] = useState('')
+    const [task, setTask] = useState('')
 
     const handleChanges = e => {
-        setForm(e.target.value)
-    }  
+        setTask(e.target.value)
+    } 
     
     const submitTodo = e => {
         e.preventDefault();
-        props.addTodo(form)
-        setForm('')
+        props.addTodo(task)
+        setTask('')
     }
     
 
     return(
         <div className='form'>
             <form onSubmit={submitTodo}>
-                <input 
+                <TextField 
                     type='text'
-                    value={form}
+                    value={task}
                     name='todo'
                     onChange={handleChanges}
+                    variant='outlined'
                 />
-                <button>Add Task</button>
+                <Button color='primary' startIcon={<Add />} variant='contained'>Add Task</Button>
             </form>
         </div>
     )

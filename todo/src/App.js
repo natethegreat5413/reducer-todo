@@ -30,7 +30,8 @@ function App() {
         <h1>Todo App</h1>
         <TodoForm addTodo={addTodo}/>
       </div>
-        <TodoList state={state}
+        <TodoList 
+        state={state}
         toggleTodo={toggleTodo} 
         clearCompleted={clearCompleted}/>
     </div>
