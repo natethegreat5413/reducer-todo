@@ -1,18 +1,18 @@
-import React, { useReducer } from 'react'
-import {reducer, initialState} from '../Reducers/Reducer'
-import Todo from "./Todo"
-import TodoForm from "./TodoForm";
+import React from 'react'
+import { Todo } from './Todo'
+import Button from '@material-ui/core/Button'
+import Delete from '@material-ui/icons/Delete'
 
-const TodoList = () => {
-    const [state, dispatch] = useReducer(reducer, initialState)
+export const TodoList = props => {
     return(
         <div>
-            {state.todos.map(todo => {
-                return <Todo todo={todo} key={todo.id} dispatch={dispatch}/>
+            {props.state.map((item) => {
+                return <Todo 
+                item={item} 
+                key={item.id} 
+                toggleTodo={props.toggleTodo} />
             })}
-            <TodoForm dispatch={dispatch} />
+            <Button onClick={props.clearCompleted} variant='contained' color='secondary' startIcon={<Delete />}>Clear Task</Button>
         </div>
     )
 }
-
-export default TodoList

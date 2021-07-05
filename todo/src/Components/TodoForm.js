@@ -1,48 +1,36 @@
 import React, {useState} from 'react'
+import Button from '@material-ui/core/Button'
+import Add from '@material-ui/icons/Add'
+import TextField from '@material-ui/core/TextField'
 
-
-
-const TodoForm = props => {
-    const [newTodo, setNewTodo] = useState("")
+export const TodoForm = props => {
+    const [task, setTask] = useState('')
 
     const handleChanges = e => {
-        setNewTodo(e.target.value);
-    }
-
-    const addTodo = e => {
+        setTask(e.target.value)
+    } 
+    
+    const submitTodo = e => {
         e.preventDefault();
-        setNewTodo("");
-        props.dispatch(
-            {
-                type: "ADD_TODO",
-                payload: {item: newTodo, completed: false, id: Date.now()}
-            }
-        )
-        setNewTodo("")
+        props.addTodo(task)
+        setTask('')
     }
-
-    const clearCompleted = e => {
-        e.preventDefault();
-        props.dispatch({ type: "CLEAR" })
-    }
+    
 
     return(
-        <div>
-            <form>
-                <input 
-                    className="todo-input"
-                    type="text"
-                    name="newtodotext"
-                    value={newTodo}
+        <div className='form'>
+            <form onSubmit={submitTodo}>
+                <TextField 
+                    type='text'
+                    value={task}
+                    name='todo'
                     onChange={handleChanges}
+                    variant='outlined'
                 />
-                
+                <Button color='primary' startIcon={<Add />} variant='contained'>Add Task</Button>
             </form>
-
-            <button onClick={addTodo}>Add Task</button>
-            <button onClick={clearCompleted}>Clear Tasks</button>
         </div>
     )
-}
 
-export default TodoForm
+
+}

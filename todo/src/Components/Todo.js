@@ -1,18 +1,13 @@
-import React from 'react';
+import React from 'react'
 
-function Todo({ todo, dispatch }) {
-    const handleChanges = id => {
-        dispatch({
-            type: "TOGGLE_COMPLETED",
-            payload: id
-        })
-    }
-    return(
-        <div className={`todo ${todo.completed ? "completed" : ""}`}
-        onClick={() => handleChanges(todo.id)}>
-        <p>{todo.item}</p>
+export const Todo = props => {
+    return (
+        <div>
+            <h2 className={props.item.completed ? 'completed' : ''}
+                onClick={(e) => {
+                e.preventDefault()
+                props.toggleTodo(props.item.id)}}> {props.item.todo} 
+            </h2>
         </div>
     )
 }
-
-export default Todo
